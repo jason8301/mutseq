@@ -2,7 +2,7 @@
 
 name := "mutseq"
 
-version := "1.1.0a"
+version := "1.1.0b"
 
 scalaVersion := "2.12.4"
 

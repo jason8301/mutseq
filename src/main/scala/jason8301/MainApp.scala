@@ -1,34 +1,29 @@
 package jason8301
 
 import java.io.File
-import java.util.Properties
-
 import jason8301.mutseq.{FastqCrawler, FastqGenerator}
 import jason8301.utils.Param
 
 object MainApp extends App{
   val helpStr = """ Mutseq version 0.1
-   usage: java -jar mutseq.jar <function> <options>
+   usage: java -jar mutseq.jar <function> <conf_file> <options>
                  Supported functions: genseq, parseFq
 
-          parseFq <fastq>
+          parseFq <conf_file> <fastq>
               parse the index splitted Fastq file <fastq> and generate two files that
               contains nucleotide and amino acid counts
 
-          genseq <count>
+          genseq <conf_file> <count>
               generate a Fastq with speficied numbers of reads
 
    """
-
-  //val properties: Properties = getProperties()
-
 
 
   if(args.length > 2) {
     val fileToParse = new File(args(2))
     //val param = new PropReader(args(1)).getProp()
     val param = Param.genParam(args(1))
-    args(0).toString.toLowerCase match {
+    args(0).toLowerCase match {
       case "parsefq" => new FastqCrawler(fileToParse, param).parse()
       case "genseq" => new FastqGenerator(args(2).toInt, param)
       case "countoccu" => new FastqCrawler(fileToParse, param).countOccu()
